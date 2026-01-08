@@ -1,0 +1,4 @@
+2026-01-07 12:28:29 File modified/created: /Users/rajeabilal/Desktop/DevOpsGit/Bash/Bash - The Game/Level 9 - Script to Monitor Directory Changes/RandomDir/somefile.txt
+2026-01-07 12:28:30 File modified/created: /Users/rajeabilal/Desktop/DevOpsGit/Bash/Bash - The Game/Level 9 - Script to Monitor Directory Changes/RandomDir/somefile.txt
+2026-01-07 12:28:33 File modified/created: /Users/rajeabilal/Desktop/DevOpsGit/Bash/Bash - The Game/Level 9 - Script to Monitor Directory Changes/RandomDir
+2026-01-07 12:28:33 File modified/created: /Users/rajeabilal/Desktop/DevOpsGit/Bash/Bash - The Game/Level 9 - Script to Monitor Directory Changes/RandomDir/somefile.txt

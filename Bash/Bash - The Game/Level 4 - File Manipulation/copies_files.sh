@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+# Mission: Create a script that copies all .txt files from the Arena directory to a new directory called Backup.
+
 function copies_files() {
     # take the directory, loop through its contents - txt files, each iteration we copy that .txt file into a new directory
     echo "What should be the name of the new directory"

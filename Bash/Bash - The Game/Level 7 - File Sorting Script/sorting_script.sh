@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Mission: Write a script that sorts all .txt files in a directory by their size, from smallest to largest, and displays the sorted list.
+
 # pass the directory as an argument
 # function counts the total number of text files
 # then iteratoes through txt file in the folder
