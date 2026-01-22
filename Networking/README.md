@@ -42,7 +42,7 @@ I configured the Security Group inbound rules to allow:
 
 - (Optional) SSH on port 22 (restricted to my IP for safer access)
 
-![Security Groups](images/security-groups.png)
+![Security Groups](images/security_groups.png)
 
 ## Step 2 — Install NGINX (turn the server into a web server)
 
