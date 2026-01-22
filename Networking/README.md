@@ -48,6 +48,9 @@ I configured the Security Group inbound rules to allow:
 
 NGINX is the software that receives web requests and returns website files back to the browser.
 
+![Install NGINX](images/install-nginx.png)
+![Start NGINX](images/start-nginx.png)
+
 ## Step 3 — Build the Next.js site as static files
 
 My portfolio was built with Next.js, so I generated a static output folder and copied it to the EC2 server.
@@ -55,6 +58,12 @@ My portfolio was built with Next.js, so I generated a static output folder and c
 ![NextJS Project](images/nextjs-project.png)
 
 - Build/export output: `out/`
+
+![Create Root Folder](images/folder-create.png)
+
+- Created a web root folder
+
+- Set permissions on the folder
 
 - Copied to a folder like: `/var/www/portfolio`
 
@@ -70,9 +79,19 @@ NGINX on Ubuntu typically uses two folders:
 
 ### What I did
 
+![Existing Configs](images/existing-configs.png)
+
+- Check existing configs
+
+![Remove Default](images/remove-default.png)
+
 - Removed the default site config (so it stops serving the default page)
 
+![new config](images/new-config.png)
+
 - Created a new config file for my domain inside sites-available
+
+![Enable Site](images/enable-site.png)
 
 - Linked it into sites-enabled so NGINX loads it
 
@@ -121,3 +140,17 @@ This ensures: when users type the domain, DNS returns the EC2 IP and the browser
 **Live:** https://rajeabilal.com
 
 ![DNS Records](images/result.png)
+
+## Repeated Commands
+
+Test NGINX Config
+
+![Test Config](images/test-config.png)
+
+Reload NGINX Config without killing connections
+
+![Reload Nginx](images/reload-nginx.png)
+
+Restart NGINX 
+
+![Restart Nginx](images/restart-nginx.png)
