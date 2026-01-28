@@ -43,3 +43,18 @@
 - Keeps PR history tidy.
 - Done with:
 
+git rebase -i HEAD~3
+
+
+- Change later commits to `squash`.
+- Edit final commit message.
+- Produces one clean commit.
+
+---
+
+## Force Push After Rewriting History
+
+- Rebase and amend rewrite commits.
+- After pushing previously, a force push is required.
+- Must be communicated to the team.
+- Dangerous on shared branches.
