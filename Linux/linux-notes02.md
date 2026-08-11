@@ -26,8 +26,7 @@ If we change ownership to root:root, the permissions stay the same but the owner
 
 ## Process Management
 
-```23:23:linux-notes.md
-ps aux
+```bashps aux
 ```
 - p - processes
 - a - from all the users
@@ -38,8 +37,7 @@ ps aux
 Show me all the running processes on this machine
 ![Screenshot showing ls -l output](screenshots/process-list.png)
 
-```23:23:linux-notes.md
-ps aux | grep nginx
+```bashps aux | grep nginx
 ```
 
 Show a list of all the processes running, take the output and pass it as an input to the second command (grep nginx), filter out only the ones related to nginx
@@ -74,8 +72,7 @@ More friendly interface
 
 ## sleep
 
-```23:23:linux-notes.md
-sleep 100 &
+```bashsleep 100 &
 ```
 
 ![Screenshot showing ls -l output](screenshots/sleep.png)
@@ -85,14 +82,12 @@ Do nothing for 100 seconds, run this command in the background and then exit.
 ## job
 When you run something in the background from your terminal, Linux calls it a job. 
 
-```23:23:linux-notes.md
-jobs
+```bashjobs
 ```
 
 What background jobs are running from this terminal?
 
-```23:23:linux-notes.md
-fg %1
+```bashfg %1
 ```
 
 Bring job number 1 back to the terminal

@@ -11,8 +11,7 @@ Find a file that is:
 
 **Solution:**
 
-```23:23:linux-notes.md
-find . -type f -size 1033c ! -executable
+```bashfind . -type f -size 1033c ! -executable
 cat ./maybehere07/.file2
 ```
 

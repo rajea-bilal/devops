@@ -8,8 +8,7 @@ Linux text processing is about taking text, filtering it and reshaping it
 
 Searches for lines that contain the specific word or pattern
 
-```23:23:linux-notes.md
-grep "error" /var/log/syslog
+```bashgrep "error" /var/log/syslog
 ```
 
 **Meaning:**
@@ -20,8 +19,7 @@ grep "error" /var/log/syslog
 
 ## grep recursive search
 
-```23:23:linux-notes.md
-grep -r "TODO" ~/projects/
+```bashgrep -r "TODO" ~/projects/
 ```
 **Meaning:**
 - -r = recursive (search inside all folders)
@@ -32,8 +30,7 @@ grep -r "TODO" ~/projects/
 
 **Case-insensitive search + counting**
 
-```23:23:linux-notes.md
-grep -i "failed" /var/log/auth.log | wc -l
+```bashgrep -i "failed" /var/log/auth.log | wc -l
 ```
 Break it down:
 
@@ -51,16 +48,14 @@ awk is used to pick out specific columns from each line.
 
 ![Screenshot showing ls -l output](screenshots/awk-explained.png)
 
-```23:23:linux-notes.md
-ps aux | awk '{print $1}'
+```bashps aux | awk '{print $1}'
 ```
 **Meaning:**
 
 - Take each line
 - Print only column 1 (USER)
 
-```23:23:linux-notes.md
-USER
+```bashUSER
 rajea
 root
 root

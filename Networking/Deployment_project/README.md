@@ -1,6 +1,8 @@
 # Portfolio Deployment (AWS EC2 + NGINX + Cloudflare DNS + HTTPS)
 
-This repo documents how I deployed my Next.js portfolio to a live Linux server using AWS EC2, NGINX, a custom domain (Cloudflare DNS), and HTTPS (Certbot + Let’s Encrypt).
+This project documents how I deployed my Next.js portfolio to a Linux server I configured myself, using AWS EC2, NGINX, a custom domain (Cloudflare DNS), and HTTPS (Certbot + Let’s Encrypt).
+
+> **Status:** this was a learning exercise and the site has since moved back to Vercel. The reason why is the most useful part — see [What happened next](#what-happened-next--and-why-i-moved-back-to-vercel) at the end.
 
 ## What I learned
 
@@ -129,17 +131,35 @@ This ensures: when users type the domain, DNS returns the EC2 IP and the browser
 
 ## Result
 
-✅ Site is live on a custom domain
+✅ Site served on a custom domain
 
-✅ NGINX serves the static build
+✅ NGINX serving the static build
 
 ✅ HTTPS enabled with Let's Encrypt
 
-✅ DNS correctly points to EC2
+✅ DNS pointing to EC2
 
-**Live:** https://rajeabilal.com
+![My portfolio loading over HTTPS from the EC2 instance](images/result.png)
 
-![DNS Records](images/result.png)
+---
+
+## What happened next — and why I moved back to Vercel
+
+This deployment worked, but I want to be straightforward about where it ended up: **rajeabilal.com is hosted on Vercel again today.** This was a learning exercise, and it taught me more by ending than it would have by staying up.
+
+The problem was updating it. My portfolio needed new projects added, and with this setup every single content change meant:
+
+1. rebuild the static export locally
+2. copy the new `out/` folder up to the server
+3. reload NGINX
+
+There was no route from "I made a commit" to "the change is live" that didn't involve me SSH-ing into a box and moving files by hand. For a site I was actively adding to, that was slower than the thing I'd replaced.
+
+That gap has a name, and it's the reason CI/CD pipelines exist. What Vercel had been quietly doing — watching the repository, running the build on a push, and publishing the output — is a pipeline I hadn't yet learned to build myself.
+
+So the honest summary: I can now configure a Linux web server, issue certificates, and point DNS at it. What I couldn't yet do was automate the deploy, which is exactly what I'm learning next.
+
+**Coming back to this:** once I've worked through Docker and CI/CD, I want to redeploy this to the same EC2 instance — containerised, with a pipeline that builds and ships on every push to `main`. That's the version worth keeping online.
 
 ## Repeated Commands
 

@@ -9,8 +9,7 @@ The password for the next level is stored in the file data.txt, which is a hexdu
 
 **Solution:**
 
-```23:23:linux-notes.md
-mkdir /tmp/bandit12
+```bashmkdir /tmp/bandit12
 cp data.txt /tmp/bandit12
 cd /tmp/bandit12
 xxd -r data.txt
@@ -20,12 +19,10 @@ xxd -r data.txt
 
 - xxd changes how the data is written, not what the data is.
 - It can convert binary data to hex data
-```23:23:linux-notes.md
-xxd file.bin
+```bashxxd file.bin
 ```
 - It can also convert hex data to binary
-```23:23:linux-notes.md
-xxd -r hex.txt binaryfile
+```bashxxd -r hex.txt binaryfile
 ```
 - "Take hex text and convert it back into binary data"
 - Next step was to figure out the compression format

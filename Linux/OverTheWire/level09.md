@@ -7,8 +7,7 @@ The password is the only line that occurs once.
 
 **Solution:**
 
-```23:23:linux-notes.md
-sort "data.txt" | uniq -u
+```bashsort "data.txt" | uniq -u
 ```
 
 ### Explanation:

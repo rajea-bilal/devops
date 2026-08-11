@@ -7,8 +7,7 @@ The file is base64 encoded.
 
 **Solution:**
 
-```23:23:linux-notes.md
-base64 -d "data.txt"
+```bashbase64 -d "data.txt"
 ```
 
 ### Explanation:

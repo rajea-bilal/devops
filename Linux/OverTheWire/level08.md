@@ -7,8 +7,7 @@ The password is in data.txt next to the word millionth.
 
 **Solution:**
 
-```23:23:linux-notes.md
-find . -type f -name "data.txt"
+```bashfind . -type f -name "data.txt"
 grep "millionth" data.txt
 ```
 

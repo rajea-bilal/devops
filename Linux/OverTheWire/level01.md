@@ -7,8 +7,7 @@ Log into the Bandit server via SSH.
 
 **Solution:**
 
-```23:23:linux-notes.md
-ssh bandit0@bandit.labs.overthewire.org -p 2220
+```bashssh bandit0@bandit.labs.overthewire.org -p 2220
 ```
 
 ### Explanation:

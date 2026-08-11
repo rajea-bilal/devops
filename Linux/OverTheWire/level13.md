@@ -9,8 +9,7 @@ The password for the next level is stored in /etc/bandit_pass/bandit14 and can o
 
 **Solution:**
 
-```23:23:linux-notes.md
-mkdir /tmp/bandit12
+```bashmkdir /tmp/bandit12
 cp data.txt /tmp/bandit12
 cd /tmp/bandit12
 xxd -r data.txt

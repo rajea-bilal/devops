@@ -20,13 +20,11 @@ Each of those three (Owner, group, others) get permissions:
 ## How do we see permissions
 
 Run:
-```23:23:linux-notes.md
-ls -l
+```bashls -l
 ```
 
 Output:
-```27:27:linux-notes.md
--rwxr-xr--
+```bash-rwxr-xr--
 ```
 
 ![Screenshot showing ls -l output](screenshots/permissions.png)
@@ -38,8 +36,7 @@ l - symlink
 
 ## Changing Permissions (chmod)
 
-```23:23:linux-notes.md
-chmod = change mode
+```bashchmod = change mode
 ```
 - ch -> change
 - mod -> mode
@@ -50,8 +47,7 @@ Change the permission mode of a file or directory. <br>
 It cannot change who owns the file, or change the contents.
 
 ### There are three numbers
-```23:23:linux-notes.md
-chmod XYZ file
+```bashchmod XYZ file
 ```
 ### Each number controls one group
 
@@ -75,8 +71,7 @@ We add them up.
 
 
 ### Example command
-```23:23:linux-notes.md
-chmod 644 notes.txt
+```bashchmod 644 notes.txt
 ```
 
 

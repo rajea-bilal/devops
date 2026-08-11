@@ -7,8 +7,7 @@ Find a file owned by bandit7 and group bandit6.
 
 **Solution:**
 
-```23:23:linux-notes.md
-find / -type f -user bandit7 -group bandit6 2>/dev/null
+```bashfind / -type f -user bandit7 -group bandit6 2>/dev/null
 cat /var/lib/dpkg/info/bandit7.password
 ```
 

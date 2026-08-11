@@ -7,8 +7,7 @@ The text is rotated by 13 characters (ROT13).
 
 **Solution:**
 
-```23:23:linux-notes.md
-cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'
+```bashcat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'
 ```
 
 ### Explanation:

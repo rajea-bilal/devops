@@ -1,41 +1,34 @@
 # Git Module – DevOps Learning Notes
 
-These notes come directly from hands-on labs and explanations covering real-world Git usage in DevOps teams.
-
-Topics include:
-
-- Branching, rebasing, merging, and squashing
-- Undoing changes safely
-- Stashing work in progress
-- Commit hygiene and amend
-- Git hooks and pre-commit automation
-- Working with remotes and SSH
-- Common Git mistakes
-- Security and secrets handling
-- Git at scale in large organisations
+Git beyond `add`, `commit`, and `push` — the workflows teams actually depend on, and how to get out of trouble when something goes wrong.
 
 ---
 
-## How to Use These Notes
+## Notes
 
-Each file focuses on one area of Git that shows up frequently in professional environments.
+| # | File | Covers |
+| --- | --- | --- |
+| 1 | [branching-rebase-merge.md](branching-rebase-merge.md) | Branching strategy, merge vs. rebase, squashing, and when each is appropriate |
+| 2 | [undoing-changes-restore-reset-revert-reflog.md](undoing-changes-restore-reset-revert-reflog.md) | `restore`, `reset`, `revert`, and recovering apparently lost work with `reflog` |
+| 3 | [stash.md](stash.md) | Setting work aside safely and getting it back |
+| 4 | [commit-hygiene-squash-amend.md](commit-hygiene-squash-amend.md) | Writing useful commits, `--amend`, and interactive squashing |
+| 5 | [hooks-precommit.md](hooks-precommit.md) | Git hooks and automating checks before a commit lands |
+| 6 | [remotes-ssh-auth.md](remotes-ssh-auth.md) | Remotes, SSH keys, and authentication |
+| 7 | [mistakes-security-secrets.md](mistakes-security-secrets.md) | Common mistakes, and what to do when a secret gets committed |
+| 8 | [git-at-scale-monorepos.gitops.md](git-at-scale-monorepos.gitops.md) | Monorepos, GitOps, and how Git works in large organisations |
 
-Suggested order:
+Read them in that order — each builds on the one before.
 
-1. branching-rebase-merge.md  
-2. undoing-changes-restore-reset-revert-reflog.md  
-3. stash.md  
-4. commit-hygiene-squash-amend.md  
-5. hooks-precommit.md  
-6. remotes-ssh-auth.md  
-7. mistakes-security-secrets.md  
-8. git-at-scale-monorepos-gitops.md  
+---
 
-These notes are written:
+## Key ideas
 
-- in plain language
-- with correct Git terminology
-- focused on DevOps workflows
-- based only on the course transcripts
+- **Rebase rewrites history, merge preserves it.** Rebase for a clean local branch before sharing; never rebase something others have already pulled.
+- **`reflog` is the safety net.** Almost nothing is truly lost — Git remembers where `HEAD` has been, even after a hard reset.
+- **`revert` is safe, `reset` is not.** `revert` adds a new commit undoing an old one; `reset` moves the branch pointer and can discard work.
+- **A committed secret stays in history.** Deleting the line in a later commit does not remove it. Rotate the credential first, then clean the history.
+- **Hooks move checks earlier.** Catching a lint error or a stray secret at commit time is far cheaper than catching it in CI.
 
-They are meant to be revision material and public learning logs.
+---
+
+Notes are written in plain language with correct Git terminology, focused on DevOps workflows. They're revision material and a public learning log.

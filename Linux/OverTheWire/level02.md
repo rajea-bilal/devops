@@ -7,8 +7,7 @@ The password is stored in a file called readme.
 
 **Solution:**
 
-```23:23:linux-notes.md
-ls
+```bashls
 cat readme
 ```
 

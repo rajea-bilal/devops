@@ -7,8 +7,7 @@ The password is in a hidden file.
 
 **Solution:**
 
-```23:23:linux-notes.md
-ls -a
+```bashls -a
 cat .hidden
 ```
 

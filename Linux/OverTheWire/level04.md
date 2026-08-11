@@ -7,8 +7,7 @@ The password is stored in a file with spaces in its name.
 
 **Solution:**
 
-```23:23:linux-notes.md
-cat "spaces in this filename"
+```bashcat "spaces in this filename"
 ```
 
 ### Explanation:

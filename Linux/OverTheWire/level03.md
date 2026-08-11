@@ -7,8 +7,7 @@ The password is stored in a file called -.
 
 **Solution:**
 
-```23:23:linux-notes.md
-cat ./-
+```bashcat ./-
 ```
 
 ### Explanation:

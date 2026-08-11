@@ -1,43 +1,52 @@
 # Networking Module – DevOps Learning Notes
 
-These notes cover core networking concepts used daily by DevOps and cloud engineers.
-
-Topics include:
-
-- Ports and protocols
-- TCP vs UDP
-- OSI model
-- TCP/IP model
-- DNS fundamentals
-- DNS records and resolution
-- Routing concepts
-- Subnetting and CIDR
-- NAT
-- Network troubleshooting tools
-- Cloud networking basics
+Core networking concepts used daily by DevOps and cloud engineers, plus a deployment project that made them concrete.
 
 ---
 
-## How to Use These Notes
+## Notes
 
-Each file focuses on one networking area.
+| File | Covers |
+| --- | --- |
+| [ports-protocols-tcp-udp.md](ports-protocols-tcp-udp.md) | Ports, common protocols, and TCP vs UDP — connection-oriented vs connectionless |
+| [osi-model.md](osi-model.md) | The seven OSI layers, why communication models exist, and what happens at each layer |
 
-Suggested reading order:
+---
 
-1. ports-protocols-tcp-udp.md  
-2. osi-model.md  
-3. tcp-ip-model.md  
-4. dns-basics-components-records.md  
-5. dns-resolution-process.md  
-6. dns-debugging-tools-hosts-file.md  
-7. routing-basics-protocols.md  
-8. subnetting-binary-cidr-nat.md  
-9. troubleshooting-tools.md  
-10. cloud-networking.md  
+## Project — Deploying a site to AWS EC2 by hand
 
-Notes are:
+The practical half of this module. I deployed my Next.js portfolio to a Linux server I configured myself, which turned DNS records and firewall rules from diagrams into things I had to get right.
 
-- extracted from lab transcripts
-- simplified into bullet points
-- written for revision
-- focused on DevOps relevance
+**AWS EC2 (Ubuntu) · NGINX · Cloudflare DNS · Certbot + Let's Encrypt**
+
+**[Full write-up with screenshots →](Deployment_project/README.md)**
+
+Covers Security Groups as firewall rules, `sites-available` / `sites-enabled`, serving a static build, issuing a TLS certificate, and repointing DNS to an EC2 public IP.
+
+The site has since moved back to Vercel — deploying by hand left no path from commit to live without SSH-ing into the server, which is the gap CI/CD closes. The write-up explains that in full.
+
+---
+
+## Suggested order
+
+1. `ports-protocols-tcp-udp.md` — ports and protocols first, since everything else references them
+2. `osi-model.md` — the layered mental model
+3. `Deployment_project/` — apply it to a real server
+
+---
+
+## Still to cover
+
+Topics on the list for when I return to this module:
+
+- TCP/IP model
+- DNS components, records, and the resolution process
+- DNS debugging tools and the hosts file
+- Routing basics and routing protocols
+- Subnetting, binary, CIDR, and NAT
+- Network troubleshooting tools
+- Cloud networking
+
+---
+
+Notes are written for revision — simplified into bullet points, correct terminology, focused on DevOps relevance.
