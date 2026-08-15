@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  web:
+    build: 821302804403.dkr.ecr.eu-north-1.amazonaws.com/flask-mysql-aws:latest
+    ports: 
+     - "5002:5001"
+    depends_on:
+     - mysql-server
+
+  mysql-server: 
+    image: mysql:8.0
+    environment: 
+      MYSQL_ROOT_PASSWORD: mysecret-pw
