@@ -30,8 +30,6 @@ I started off the project by creating a parent folder `flask_redis_app` with two
 
 I chose those names as they helped me understand the process better. 
 
-Next I created a `docker-compose.yaml` file in the root directory Docker compose is for managing the application defined in YAML. We using the command`docker-compose up -d` to define and run both services together, and automatically places them on the same network.
-
 The `flask-container` folder is the Flask app, and contains two files
 
 1. `dockerFile`
@@ -61,14 +59,14 @@ The `redis-container` folder contains the Dockerfile used to build the Redis ser
 
 - imports `redis:8` as the base image from Docker Hub 
 
-Once the above was set up, I specified the two services of the app; 
+Next I created a `docker-compose.yaml` file in the root directory, specifying the two services of the app 
 
 - web and database 
 - their appropriate build folders, 
 - port
 
 
-Docker compose is managing the application defined in YAML. We use the command
+Docker compose manages the application defined in the YAML file. We use the command
 `docker-compose up -d` to define and run both services together, with Docker Compose automatically placing them on the same network.
 
 
@@ -197,3 +195,51 @@ Nginx should listen for incoming requests on port 5004
 `
 
 When someone asks for anything beginning at /, use these instructions: take the request that Nginx received and pass it to the backend I called flask_app
+
+
+`  
+nginx:
+    image: nginx:latest
+    ports:
+        - "5002:5002"
+    volumes:
+        - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+        - web
+`
+
+Take my local nginx.config file and place it where Nginx expects its config files inside the container (bind mount - youre mounting a file from your machine into the container)
+
+## Problems
+
+### I mixed up Redis Cloud with a locally running Redis server
+
+I initially used the host, port, username and password shown on the Redis Cloud dashboard. But my actual goal was 
+
+Flask container ----> local Redis container.
+
+So I had to backtrack and understand that for a local Redis server, Flask just needs to connect to a `redis` host on `port=6379`. The `redis` hostname came from the Docker Compose service name. 
+
+## Confusion between host and depends_on in the YAML file
+
+I realised that `host=redis` tells Flask where Redis is
+
+depends_on:
+    - redis
+
+Tells Docker Compose which service should be started before the web service.
+
+They both referenced `redis` but do different jobs. 
+
+## Redis connection variable had the wrong scope
+
+One of the issues I faced was a scope problem. 
+
+I had placed the connection to the Redis server inside the `welcome()` that runs when a request hits the root route (/). The problem was when I tried to access Redis in the `display_count()` to display visit count to the user, it was out of scope. 
+
+I fixed this by keeping the Redis connection outside the route functions so either function can access Redis through the `r` variable.
+
+## Redis valudes need converting before doing arithmetic
+
+Another problem was Redis returns a string instead of a number so when I tried to increment the result from Redis, it gave an error. I had to first convert the result from Redis into an integer and then increase it. 
+
