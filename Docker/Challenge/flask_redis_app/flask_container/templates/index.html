@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+
+    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <title>STACKYARD</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+</head>
+
+<body>
+    <main>
+        <section class="hero">
+
+            <img
+                class="hero__art"
+                src="{{ url_for('static', filename='image/stackyard-hero.png') }}"
+                alt="Technical illustration of the STACKYARD Docker system"
+            >
+
+            <div class="hero__copy">
+
+                <p class="hero__label">
+                    DOCKER SYSTEM / 001
+                </p>
+
+                <h1 class="hero__title">
+                    STACK<br>
+                    YARD
+                </h1>
+
+                <p class="hero__description">
+                    A load-balanced web app built with Flask, running in multiple Docker containers. Nginx spreads incoming requests across several Flask instances, Redis tracks activity, and shared data is kept in a persistent volume so it’s consistent across containers.
+                </p>
+
+                <p class="hero__spec">
+                    NGINX &rarr; FLASK x3<br>
+                    REDIS &rarr; SHARED-DATA
+                </p>
+
+                <a class="hero__link" href="/count">
+                    VIEW LIVE TRAFFIC &rarr;
+                </a>
+
+            </div>
+
+        </section>
+    </main>
+</body>
+</html>

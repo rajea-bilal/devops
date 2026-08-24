@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <title>Live Traffic | STACKYARD</title>
+</head>
+
+<body class="stats-page">
+
+    <main class="traffic">
+
+        <header class="traffic__header">
+            <p class="traffic__label">
+                STACKYARD / LIVE TRAFFIC / 002
+            </p>
+
+
+
+            <a
+                class="traffic__back"
+                href="{{ url_for('welcome') }}"
+            >
+                ← BACK TO SYSTEM
+            </a>
+        </header>
+
+        <p>
+            Refresh this page to send another request through NGINX. The request will be distributed across three replicated Flask containers. Counts are stored in Redis and preserved through container restarts using a Docker volume.
+        </p>
+
+
+        <section class="traffic__summary">
+
+            <div class="traffic__total-section">
+                <p class="traffic__eyebrow">
+                    TOTAL REQUESTS
+                </p>
+
+                <h1 class="traffic__total">
+                    {{ total_visits }}
+                </h1>
+
+                <p class="traffic__description">
+                    Requests distributed by Nginx across all active
+                    Flask containers.
+                </p>
+            </div>
+
+
+            <div class="traffic__current">
+                <p class="traffic__eyebrow">
+                    CURRENT REQUEST HANDLED BY
+                </p>
+
+                <h2 class="traffic__current-name">
+                    {{ current_container }}
+                </h2>
+
+                <p class="traffic__current-count">
+                    {{ current_container_visits }} requests handled
+                </p>
+
+                <span class="traffic__status">
+                    ACTIVE
+                </span>
+            </div>
+
+        </section>
+
+
+        <section class="traffic__ledger">
+
+            <div class="traffic__ledger-heading">
+                <span>CONTAINER</span>
+                <span>REQUESTS</span>
+                <span>STATUS</span>
+            </div>
+
+
+            {% for container_name, visits in container_counts.items() %}
+
+                <div
+                    class="traffic__row
+                    {% if container_name == current_container %}
+                        traffic__row--active
+                    {% endif %}"
+                >
+                    <span class="traffic__container-name">
+                        {{ container_name }}
+                    </span>
+
+                    <strong class="traffic__container-count">
+                        {{ visits }}
+                    </strong>
+
+                    <span class="traffic__container-status">
+                        {% if container_name == current_container %}
+                            ACTIVE
+                        {% else %}
+                            READY
+                        {% endif %}
+                    </span>
+                </div>
+
+            {% endfor %}
+
+        </section>
+
+
+        <footer class="traffic__footer">
+            <span>NGINX :5004</span>
+            <span>FLASK × {{ container_counts|length }}</span>
+            <span>REDIS :6379</span>
+            <span>VOLUME / SHARED-DATA</span>
+        </footer>
+
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+@font-face {
+    font-family: "StackDisplay";
+    src: url("../fonts/Pixelta.ttf") format("truetype");
+  }
+  
+  :root {
+    --paper: #f4eedc;
+    --ink: #111111;
+    --blue: #2496ed;
+  }
+  
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", sans-serif;
+  }
+  
+
+  /* In style.css */
+/* In style.css, near your .hero styles */
+.hero { position: relative; }
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+}
+
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    background: var(--paper);
+  }
+  
+  .hero__art {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  .hero__copy {
+    position: relative;
+    z-index: 1;
+    width: 40%;
+    padding: clamp(2rem, 6vw, 7rem);
+  }
+  
+  .hero__label,
+  .hero__spec,
+  .hero__link {
+    font-family: "StackPixel", monospace;
+    font-size: clamp(0.65rem, 0.8vw, 0.85rem);
+    line-height: 1.7;
+    letter-spacing: 0.04em;
+  }
+  
+  .hero__title {
+    margin: 2rem 0;
+    font-family: "StackDisplay", sans-serif;
+    font-size: clamp(7rem, 10vw, 11rem);
+    font-weight: 900;
+    line-height: 0.76;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  
+ 
+  
+  .hero__link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 3px solid var(--blue);
+  }

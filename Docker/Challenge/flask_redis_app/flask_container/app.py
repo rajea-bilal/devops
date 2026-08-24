@@ -1,36 +1,55 @@
-from flask import Flask
+from flask import Flask, render_template
 import redis
-import os # os is a built-in Python module, using it so Python can read the env var.
+import os
+import socket
 
 app = Flask(__name__)
 
-# connect to redis server
 
-redis_host = os.getenv("REDIS_HOST", "redis") # look for env var called "REDIS_HOST"
-redis_port = int(os.getenv("REDIS_PORT", 6379)) # look for env var called "REDIS_PORT"
+# Connect to Redis
+redis_host = os.getenv("REDIS_HOST", "redis")
+redis_port = int(os.getenv("REDIS_PORT", 6379))
 
-r = redis.Redis(host=redis_host, port=redis_port) # connect with Redis using this hostname and port.
+r = redis.Redis(
+    host=redis_host,
+    port=redis_port,
+    decode_responses=True
+)
 
-@app.route('/')
+
+@app.route("/")
 def welcome():
- return f"Hey User, welcome to a Flask app conntected to a Redis database!"
+    return render_template("index.html")
+
 
 @app.route("/count")
 def display_count():
-    count = r.get("count")
 
-    if not count:
-        r.set("count", 1)
-        return f'The current count is 1'
-    else :
-        count = int(count)
-        r.set("count", count + 1)
-        return f'The current count is {int(r.get("count"))}'
-    
-    
-    
-    
-if  __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5004)
+    # Identify the Flask container handling this request
+    container_name = socket.gethostname()[:4]
+    container_key = f"web-container-{container_name}"
 
-# allow connections coming into the container, rather than only accepting connections from inside itself.
+    # Increase this container's visit count
+    # If the key does not exist, Redis creates it with the value 1
+    current_container_visits = r.incr(container_key)
+
+    # Collect the visit count for every Flask container
+    container_counts = {}
+
+    for key in r.scan_iter(match="web-container-*"):
+        container_counts[key] = int(r.get(key))
+
+    # Add together visits from every container
+    total_visits = sum(container_counts.values())
+
+    return render_template(
+        "count.html",
+        current_container=container_key,
+        current_container_visits=current_container_visits,
+        container_counts=container_counts,
+        total_visits=total_visits
+    )
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5004)
