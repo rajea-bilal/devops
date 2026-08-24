@@ -83,12 +83,17 @@ a {
 
 /* Hero artwork */
 
-.hero__art {
+.hero__visual {
   position: absolute;
   z-index: 1;
   inset: 0;
 
+  overflow: hidden;
+}
+
+.hero__art {
   display: block;
+
   width: 100%;
   height: 100%;
 
@@ -428,45 +433,90 @@ a {
 ---------------------------------- */
 
 @media (max-width: 800px) {
-  /* Landing page */
-
   .hero {
       display: flex;
       flex-direction: column;
-
-      min-height: 100vh;
       min-height: 100svh;
   }
 
   .hero__copy {
+      position: relative;
       order: 1;
 
       width: 100%;
-      padding: 3rem 2rem;
+      padding: 2.5rem 2rem 2rem;
+
+      background-color: var(--paper);
   }
 
   .hero__title {
       margin: 1.5rem 0;
 
-      font-size: clamp(4rem, 20vw, 7rem);
-      line-height: 0.78;
+      font-size: clamp(4rem, 18vw, 6.5rem);
+      line-height: 0.76;
   }
 
   .hero__description {
-      max-width: 38rem;
+      max-width: 36rem;
+
+      font-size: 1rem;
+      line-height: 1.5;
   }
 
-  .hero__art {
+  .hero__spec {
+      margin-top: 1.5rem;
+  }
+
+  .hero__link {
+      margin-top: 1.25rem;
+  }
+
+  .hero__visual {
       position: relative;
       order: 2;
       inset: auto;
 
       width: 100%;
-      height: clamp(300px, 70vw, 500px);
+      height: clamp(300px, 75vw, 420px);
 
-      object-fit: cover;
-      object-position: 74% center;
+      overflow: hidden;
+      border-top: 2px solid var(--ink);
   }
+
+  .hero__art {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+
+      width: 165%;
+      max-width: none;
+      height: auto;
+
+      object-fit: initial;
+  }
+}
+ 
+@media (max-width: 520px) {
+  .hero__copy {
+      padding: 2rem 1.25rem 1.75rem;
+  }
+
+  .hero__title {
+      font-size: clamp(3.7rem, 19vw, 5.2rem);
+  }
+
+  .hero__description {
+      font-size: 0.95rem;
+  }
+
+  .hero__visual {
+      height: 320px;
+  }
+
+  .hero__art {
+      width: 165%;
+  }
+}
 
 
   /* Traffic page */
