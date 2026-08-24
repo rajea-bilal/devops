@@ -494,30 +494,6 @@ a {
 
       object-fit: initial;
   }
-}
- 
-@media (max-width: 520px) {
-  .hero__copy {
-      padding: 2rem 1.25rem 1.75rem;
-  }
-
-  .hero__title {
-      font-size: clamp(3.7rem, 19vw, 5.2rem);
-  }
-
-  .hero__description {
-      font-size: 0.95rem;
-  }
-
-  .hero__visual {
-      height: 320px;
-  }
-
-  .hero__art {
-      width: 165%;
-  }
-}
-
 
   /* Traffic page */
 
