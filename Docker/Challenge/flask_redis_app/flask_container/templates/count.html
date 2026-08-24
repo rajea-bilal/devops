@@ -8,6 +8,15 @@
         content="width=device-width, initial-scale=1.0"
     >
 
+    <!-- Same font as the landing page -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet"
+    >
+
     <link
         rel="stylesheet"
         href="{{ url_for('static', filename='css/style.css') }}"
@@ -21,59 +30,78 @@
     <main class="traffic">
 
         <header class="traffic__header">
+
             <p class="traffic__label">
                 STACKYARD / LIVE TRAFFIC / 002
             </p>
-
-
 
             <a
                 class="traffic__back"
                 href="{{ url_for('welcome') }}"
             >
-                ← BACK TO SYSTEM
+                &larr; BACK TO SYSTEM
             </a>
+
         </header>
 
-        <p>
-            Refresh this page to send another request through NGINX. The request will be distributed across three replicated Flask containers. Counts are stored in Redis and preserved through container restarts using a Docker volume.
-        </p>
+
+        <section class="traffic__intro">
+
+            <h1 class="traffic__title">
+                LIVE<br>
+                TRAFFIC
+            </h1>
+
+            <p class="traffic__intro-text">
+                Refresh this page to send another request through Nginx.
+                The request will be distributed across the replicated Flask
+                containers. Redis records the activity, while the Docker
+                volume preserves the data through container restarts.
+            </p>
+
+        </section>
 
 
         <section class="traffic__summary">
 
             <div class="traffic__total-section">
+
                 <p class="traffic__eyebrow">
                     TOTAL REQUESTS
                 </p>
 
-                <h1 class="traffic__total">
+                <p class="traffic__total">
                     {{ total_visits }}
-                </h1>
+                </p>
 
                 <p class="traffic__description">
                     Requests distributed by Nginx across all active
                     Flask containers.
                 </p>
+
             </div>
 
 
             <div class="traffic__current">
-                <p class="traffic__eyebrow">
-                    CURRENT REQUEST HANDLED BY
-                </p>
 
-                <h2 class="traffic__current-name">
-                    {{ current_container }}
-                </h2>
+                <div>
+                    <p class="traffic__eyebrow">
+                        CURRENT REQUEST HANDLED BY
+                    </p>
 
-                <p class="traffic__current-count">
-                    {{ current_container_visits }} requests handled
-                </p>
+                    <h2 class="traffic__current-name">
+                        {{ current_container }}
+                    </h2>
+
+                    <p class="traffic__current-count">
+                        {{ current_container_visits }} requests handled
+                    </p>
+                </div>
 
                 <span class="traffic__status">
                     ACTIVE
                 </span>
+
             </div>
 
         </section>
@@ -90,12 +118,8 @@
 
             {% for container_name, visits in container_counts.items() %}
 
-                <div
-                    class="traffic__row
-                    {% if container_name == current_container %}
-                        traffic__row--active
-                    {% endif %}"
-                >
+                <div class="traffic__row{% if container_name == current_container %} traffic__row--active{% endif %}">
+
                     <span class="traffic__container-name">
                         {{ container_name }}
                     </span>
@@ -105,12 +129,15 @@
                     </strong>
 
                     <span class="traffic__container-status">
+
                         {% if container_name == current_container %}
                             ACTIVE
                         {% else %}
                             READY
                         {% endif %}
+
                     </span>
+
                 </div>
 
             {% endfor %}

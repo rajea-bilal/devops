@@ -1,84 +1,574 @@
-@font-face {
-    font-family: "StackDisplay";
-    src: url("../fonts/Pixelta.ttf") format("truetype");
-  }
-  
-  :root {
-    --paper: #f4eedc;
-    --ink: #111111;
-    --blue: #2496ed;
-  }
-  
-  body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: "IBM Plex Sans", sans-serif;
-  }
-  
+/* ---------------------------------
+   FONTS AND VARIABLES
+---------------------------------- */
 
-  /* In style.css */
-/* In style.css, near your .hero styles */
-.hero { position: relative; }
+@font-face {
+  font-family: "StackDisplay";
+  src: url("../fonts/Pixelta.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --paper: #f4eedc;
+  --ink: #111111;
+  --blue: #2496ed;
+  --body-font: "IBM Plex Sans", sans-serif;
+  --display-font: "StackDisplay", sans-serif;
+}
+
+
+/* ---------------------------------
+ GLOBAL STYLES
+---------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--paper);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+
+  color: var(--ink);
+  background-color: var(--paper);
+
+  font-family: var(--body-font);
+}
+
+a {
+  color: inherit;
+}
+
+
+/* ---------------------------------
+ LANDING PAGE
+---------------------------------- */
+
+.hero {
+  position: relative;
+
+  min-height: 100vh;
+  min-height: 100svh;
+
+  overflow: hidden;
+  background-color: var(--paper);
+}
+
+
+/* Paper grain */
+
 .hero::after {
-  content: "";
   position: absolute;
+  z-index: 2;
   inset: 0;
+
+  content: "";
   pointer-events: none;
-  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E");
   background-size: 200px 200px;
+
   opacity: 0.05;
   mix-blend-mode: multiply;
 }
 
+
+/* Hero artwork */
+
+.hero__art {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+}
+
+
+/* Hero text */
+
+.hero__copy {
+  position: relative;
+  z-index: 3;
+
+  width: min(52%, 52rem);
+  padding: clamp(2rem, 6vw, 7rem);
+}
+
+.hero__label,
+.hero__spec,
+.hero__link {
+  font-family: var(--body-font);
+  font-size: clamp(0.68rem, 0.8vw, 0.85rem);
+  font-weight: 700;
+  line-height: 1.7;
+  letter-spacing: 0.06em;
+}
+
+.hero__label {
+  margin: 0;
+}
+
+.hero__title {
+  margin: 2rem 0;
+
+  font-family: var(--display-font);
+  font-size: clamp(6rem, 10vw, 11rem);
+  font-weight: normal;
+  line-height: 0.76;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hero__description {
+  max-width: 34rem;
+  margin: 0;
+
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  line-height: 1.6;
+}
+
+.hero__spec {
+  margin: 2rem 0 0;
+}
+
+.hero__link {
+  display: inline-block;
+
+  margin-top: 1.5rem;
+  padding-bottom: 3px;
+
+  color: var(--ink);
+  text-decoration: none;
+
+  border-bottom: 3px solid var(--blue);
+
+  transition:
+      color 150ms ease,
+      background-color 150ms ease;
+}
+
+.hero__link:hover {
+  color: var(--paper);
+  background-color: var(--ink);
+}
+
+
+/* ---------------------------------
+ LIVE TRAFFIC PAGE
+---------------------------------- */
+
+.stats-page {
+  min-height: 100vh;
+
+  color: var(--ink);
+  background-color: var(--paper);
+}
+
+.traffic {
+  width: min(1400px, calc(100% - 64px));
+  margin: 0 auto;
+  padding: 32px 0 48px;
+}
+
+
+/* Traffic header */
+
+.traffic__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+
+  padding-bottom: 18px;
+  border-bottom: 3px solid var(--ink);
+}
+
+.traffic__label,
+.traffic__back {
+  margin: 0;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.traffic__back {
+  padding-bottom: 3px;
+
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+}
+
+.traffic__back:hover {
+  border-bottom-color: var(--blue);
+}
+
+
+/* Traffic introduction */
+
+.traffic__intro {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  align-items: end;
+  gap: clamp(40px, 7vw, 100px);
+
+  padding: 70px 0 48px;
+}
+
+.traffic__title {
+  margin: 0;
+
+  font-family: var(--display-font);
+  font-size: clamp(5rem, 10vw, 10rem);
+  font-weight: normal;
+  line-height: 0.76;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.traffic__intro-text {
+  max-width: 600px;
+  margin: 0;
+
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  line-height: 1.6;
+}
+
+
+/* Request summary */
+
+.traffic__summary {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+
+  border: 3px solid var(--ink);
+}
+
+.traffic__total-section,
+.traffic__current {
+  min-width: 0;
+  padding: clamp(24px, 4vw, 56px);
+}
+
+.traffic__total-section {
+  color: var(--paper);
+  background-color: var(--ink);
+}
+
+.traffic__current {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+
+  background-color: var(--blue);
+}
+
+.traffic__eyebrow {
+  margin: 0 0 24px;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+}
+
+.traffic__total {
+  margin: 0;
+
+  font-size: clamp(6rem, 15vw, 13rem);
+  font-weight: 700;
+  line-height: 0.75;
+  letter-spacing: -0.08em;
+}
+
+.traffic__description {
+  max-width: 390px;
+  margin: 36px 0 0;
+
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.traffic__current-name {
+  overflow-wrap: anywhere;
+  margin: 0;
+
+  font-size: clamp(2rem, 5vw, 5rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+}
+
+.traffic__current-count {
+  margin: 22px 0 0;
+  font-weight: 600;
+}
+
+.traffic__status {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 12px;
+  border: 2px solid var(--ink);
+
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.traffic__status::before {
+  width: 9px;
+  height: 9px;
+
+  content: "";
+  background-color: var(--ink);
+}
+
+
+/* Container ledger */
+
+.traffic__ledger {
+  margin-top: 48px;
+
+  border-top: 3px solid var(--ink);
+  border-right: 3px solid var(--ink);
+  border-left: 3px solid var(--ink);
+}
+
+.traffic__ledger-heading,
+.traffic__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 160px 130px;
+  align-items: stretch;
+}
+
+.traffic__ledger-heading {
+  color: var(--paper);
+  background-color: var(--ink);
+
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.traffic__ledger-heading span,
+.traffic__row > * {
+  display: flex;
+  align-items: center;
+  padding: 14px 20px;
+}
+
+.traffic__row {
+  min-height: 86px;
+  border-bottom: 3px solid var(--ink);
+}
+
+.traffic__row > * + * {
+  border-left: 3px solid var(--ink);
+}
+
+.traffic__row--active {
+  background-color: var(--blue);
+}
+
+.traffic__container-name {
+  overflow-wrap: anywhere;
+
+  font-size: clamp(1.1rem, 2.5vw, 2rem);
+  font-weight: 700;
+}
+
+.traffic__container-count {
+  font-size: 2rem;
+}
+
+.traffic__container-status {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+
+/* Technical footer */
+
+.traffic__footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+
+  margin-top: 48px;
+  padding-top: 18px;
+
+  border-top: 3px solid var(--ink);
+
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+
+/* ---------------------------------
+ TABLET
+---------------------------------- */
+
+@media (max-width: 800px) {
+  /* Landing page */
+
   .hero {
-    position: relative;
-    min-height: 100vh;
-    overflow: hidden;
-    background: var(--paper);
+      display: flex;
+      flex-direction: column;
+
+      min-height: 100vh;
+      min-height: 100svh;
   }
-  
-  .hero__art {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
-  
+
   .hero__copy {
-    position: relative;
-    z-index: 1;
-    width: 40%;
-    padding: clamp(2rem, 6vw, 7rem);
+      order: 1;
+
+      width: 100%;
+      padding: 3rem 2rem;
   }
-  
-  .hero__label,
-  .hero__spec,
-  .hero__link {
-    font-family: "StackPixel", monospace;
-    font-size: clamp(0.65rem, 0.8vw, 0.85rem);
-    line-height: 1.7;
-    letter-spacing: 0.04em;
-  }
-  
+
   .hero__title {
-    margin: 2rem 0;
-    font-family: "StackDisplay", sans-serif;
-    font-size: clamp(7rem, 10vw, 11rem);
-    font-weight: 900;
-    line-height: 0.76;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+      margin: 1.5rem 0;
+
+      font-size: clamp(4rem, 20vw, 7rem);
+      line-height: 0.78;
   }
-  
- 
-  
+
+  .hero__description {
+      max-width: 38rem;
+  }
+
+  .hero__art {
+      position: relative;
+      order: 2;
+      inset: auto;
+
+      width: 100%;
+      height: clamp(300px, 70vw, 500px);
+
+      object-fit: cover;
+      object-position: 74% center;
+  }
+
+
+  /* Traffic page */
+
+  .traffic {
+      width: min(100% - 32px, 1400px);
+      padding-top: 20px;
+  }
+
+  .traffic__intro {
+      grid-template-columns: 1fr;
+      gap: 40px;
+
+      padding: 48px 0 40px;
+  }
+
+  .traffic__title {
+      font-size: clamp(4rem, 18vw, 7rem);
+  }
+
+  .traffic__summary {
+      grid-template-columns: 1fr;
+  }
+
+  .traffic__current-name {
+      font-size: clamp(2rem, 9vw, 4rem);
+  }
+
+  .traffic__ledger-heading,
+  .traffic__row {
+      grid-template-columns: minmax(0, 1fr) 100px 100px;
+  }
+
+  .traffic__ledger-heading span,
+  .traffic__row > * {
+      padding: 12px;
+  }
+}
+
+
+/* ---------------------------------
+ SMALL PHONES
+---------------------------------- */
+
+@media (max-width: 520px) {
+  /* Landing page */
+
+  .hero__copy {
+      padding: 2rem 1.25rem;
+  }
+
+  .hero__title {
+      font-size: clamp(3.7rem, 19vw, 5.5rem);
+  }
+
+  .hero__description {
+      font-size: 0.95rem;
+      line-height: 1.55;
+  }
+
   .hero__link {
-    display: inline-block;
-    margin-top: 1.5rem;
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 3px solid var(--blue);
+      margin-top: 1.25rem;
   }
+
+  .hero__art {
+      height: 320px;
+      object-position: 76% center;
+  }
+
+
+  /* Traffic page */
+
+  .traffic__header {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 12px;
+  }
+
+  .traffic__title {
+      font-size: clamp(3.7rem, 19vw, 5.5rem);
+  }
+
+  .traffic__current {
+      flex-direction: column;
+  }
+
+  .traffic__ledger-heading,
+  .traffic__row {
+      grid-template-columns: minmax(0, 1fr) 75px;
+  }
+
+  .traffic__ledger-heading span:last-child,
+  .traffic__container-status {
+      display: none;
+  }
+
+  .traffic__container-count {
+      justify-content: center;
+      font-size: 1.5rem;
+  }
+
+  .traffic__footer {
+      flex-direction: column;
+  }
+}

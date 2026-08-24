@@ -1,11 +1,11 @@
-FROM python:3.10-slim 
+FROM python:3.10-slim
 
 WORKDIR /app
 
-RUN pip install flask redis
+RUN pip install --no-cache-dir flask redis gunicorn
 
-COPY . . 
+COPY . .
 
-EXPOSE 5003
+EXPOSE 5004
 
-CMD ["python", "app.py"]        
+CMD ["gunicorn", "--bind", "0.0.0.0:5004", "app:app"]
