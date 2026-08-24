@@ -88,7 +88,7 @@ After that the build went through.
 docker network create my-custom-network
 ```
 
-![Creating the custom Docker network](images/docker_custom_network.png)
+[!Creating the custom Docker network](images/docker_custom_network.png)
 
 Both containers go on this network so they can reach each other by name instead of by IP address.
 
@@ -196,7 +196,7 @@ Docker compose runs each service as a separate container, creating a network for
 
 /insert image from /images folder
 
-When I tried to reach the app on localhost:50001, it was showing an error, despite the containers working. 
+When I tried to reach the app on localhost:5001, it was showing an error, despite the containers working. 
 
 ![Docker compose showing the two containers running](images/docker-compose-running.png)
 
@@ -225,3 +225,7 @@ The browser is visible, means flask app is able to connect with MySQL database a
 
 ![Docker compose results in browser](images/result-in-browser.png)
 
+
+
+Important command to inspect logs and find errors
+docker compose logs -f web

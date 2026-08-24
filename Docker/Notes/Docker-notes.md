@@ -987,3 +987,59 @@ Interview
 
 Why do we use container orchestration tools?
 Container orchestration tools automate the deployment, scaling, and management of containers across multiple machines. They also provide features such as high availability and self-healing, where failed containers can be detected and restarted or relocated automatically. This makes large-scale containerized applications more reliable and easier to manage.
+
+36 — Scaling Flask with NGINX
+
+Why does scaling a Docker Compose service cause a port conflict when using ports?
+If you scale the Flask service to multiple containers, every container tries to bind to the same host port. Only one container can use that host port, so Docker reports a port conflict.
+
+Why use expose instead of ports for the scaled Flask containers?
+expose makes the Flask port available to other containers on the Docker network without binding it to a port on the host machine. This allows multiple Flask containers to use the same internal port.
+
+What is the difference between ports and expose here?
+ports makes a container port accessible through the host machine.
+expose makes the port available only inside the Docker network.
+
+What problem appears after changing Flask from ports to expose?
+The Flask containers can communicate internally, but the application can no longer be accessed directly through something like localhost:5002.
+
+Why introduce NGINX?
+NGINX provides one host-facing entry point and forwards incoming requests to the multiple Flask containers behind it.
+
+What is NGINX doing as a reverse proxy?
+The client sends requests to NGINX instead of directly to a Flask container. NGINX then forwards those requests to the Flask application containers.
+
+What is load balancing?
+Load balancing distributes incoming requests across multiple instances of an application instead of sending every request to one container.
+
+How does NGINX find the scaled Flask containers?
+The NGINX configuration uses the Docker Compose service name, such as web. Docker's internal DNS resolves that service name to the containers belonging to that service.
+
+What is the final traffic flow?
+
+Browser
+   ↓
+localhost:5002
+   ↓
+NGINX
+   ↓
+Flask container 1
+Flask container 2
+Flask container 3
+
+NGINX owns the host port, while the Flask containers are only accessible internally.
+
+Why is this useful in production?
+Traffic can be distributed across several application instances, helping the application handle more requests and making it more resilient than relying on a single instance.
+
+30-Second Recall
+Scaling Flask with the same host ports mapping → port conflict.
+Change Flask to expose → containers are accessible inside Docker only.
+Add NGINX → one host-facing entry point.
+NGINX acts as a reverse proxy/load balancer.
+Requests are distributed across multiple Flask containers.
+Docker's internal DNS lets NGINX use the Compose service name such as web.
+Interview
+
+Why would you put NGINX in front of multiple Docker containers?
+When multiple instances of an application are running, they cannot all bind to the same host port. NGINX can provide a single host-facing endpoint and act as a reverse proxy and load balancer, distributing requests across the application containers. This helps the application scale and improves resilience.

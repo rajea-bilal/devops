@@ -436,7 +436,8 @@ a {
   .hero {
       display: flex;
       flex-direction: column;
-      min-height: 100svh;
+      min-height: auto;
+      overflow: visible;
   }
 
   .hero__copy {
@@ -476,23 +477,23 @@ a {
       order: 2;
       inset: auto;
 
-      width: 100%;
-      height: clamp(300px, 75vw, 420px);
+      width: 100vw;
+      max-width: 100vw;
+      margin-left: calc(50% - 50vw);
+      aspect-ratio: 16 / 10;
 
       overflow: hidden;
       border-top: 2px solid var(--ink);
   }
 
   .hero__art {
-      position: absolute;
-      right: 0;
-      bottom: 0;
+      display: block;
 
-      width: 165%;
-      max-width: none;
-      height: auto;
+      width: 100%;
+      height: 100%;
 
-      object-fit: initial;
+      object-fit: cover;
+      object-position: 78% center;
   }
 
   /* Traffic page */
@@ -555,11 +556,6 @@ a {
 
   .hero__link {
       margin-top: 1.25rem;
-  }
-
-  .hero__art {
-      height: 320px;
-      object-position: 76% center;
   }
 
 

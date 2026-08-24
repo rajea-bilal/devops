@@ -13,3 +13,8 @@
 .env
 .env.local
 *.pem
+
+# Python
+venv/
+__pycache__/
+*.pyc
