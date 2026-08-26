@@ -128,12 +128,11 @@ a {
 
 .hero__title {
   margin: 2rem 0;
-
   font-family: var(--display-font);
-  font-size: clamp(6rem, 10vw, 11rem);
+  font-size: clamp(6rem, 12vw, 14rem);
   font-weight: normal;
   line-height: 0.76;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
 }
 
