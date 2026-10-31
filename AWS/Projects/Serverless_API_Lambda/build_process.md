@@ -56,7 +56,7 @@ The saved record contains:
 
 The timestamp comes from `new Date().toISOString()`. It gives me a consistent date and time in UTC, stored as a string.
 
-![DynamoDB students table](./images/dynamodb.png)
+![DynamoDB students table created with an id (String) partition key](./images/dynamo_db.png)
 
 ## 3. Setting up API Gateway and testing the first connection
 
@@ -68,9 +68,9 @@ I connected the method to a Lambda function. I first wanted to check that API Ga
 
 This helped me test one part of the flow at a time. A successful response at this point proved the API-to-Lambda connection worked; it didn't yet prove that anything had been saved to DynamoDB.
 
-![POST submit integrated with Lambda](./images/API_gateway_created.png)
+![studentsAPI REST API created in API Gateway](./images/API_gateway_created.png)
 
-![POST submit integrated with Lambda](./images/post_api_gateway.png)
+![Creating the POST method with a Lambda integration and proxy integration switched off](./images/post_api_gateway.png)
 
 ## 4. Giving Lambda permission to use DynamoDB
 
@@ -90,8 +90,9 @@ CloudWatch logging permissions allow the functions to write logs, which are usef
 
 I selected the appropriate role under each function's **Configuration → Permissions**. The important check was that the policy was attached to the role the function was actually using.
 
-![Table permissions policy](./images/dynamoDB_put.png)
-![Table permissions policy](./images/Dynamo_write_policy.png)
+![Policy editor allowing dynamodb:PutItem on the students table](./images/dynamoDB_put.png)
+
+![DynamoDBWrite policy created](./images/Dynamo_write_policy.png)
 
 ## 5. Writing the addStudent function
 
@@ -147,7 +148,7 @@ Because proxy integration is off and this build passes the JSON request through 
 
 For a file named `index.mjs`, the Lambda handler setting needs to match the exported function: `index.addStudent`.
 
-![addStudent Lambda function](./images/execution_role_addStudent.png)
+![addStudent execution role with CloudWatch Logs and DynamoDB permissions](./images/execution_role_addStudent.png)
 
 ## 6. Deploying the API and testing POST in Postman
 
@@ -161,6 +162,8 @@ The endpoint follows this format:
 https://<api-id>.execute-api.eu-north-1.amazonaws.com/DeployedAPI/submit
 ```
 
+![DeployedAPI stage showing the invoke URL for POST /submit](./images/client_api_endpoint_post.png)
+
 In Postman, I selected **POST**, entered the endpoint and used **Body → raw → JSON**:
 
 ```json
@@ -172,13 +175,13 @@ In Postman, I selected **POST**, entered the endpoint and used **Body → raw �
 
 I sent the request and checked both the response and the DynamoDB table. Seeing the new item in the table confirmed the full write flow worked.
 
-![Successful POST request in Postman](./images/dynamodb_write_success.png)
-![Student record saved in DynamoDB](./images/client_api_endpoint.png)
-![Student record saved in DynamoDB](./images/successful_postman.png)
+![Successful POST request in Postman](./images/successful_postman.png)
+
+![Student record saved in DynamoDB](./images/dynamodb_write_success.png)
 
 ## 7. Adding GET to retrieve the students
 
-Once I could save records, I added a second function called `getAllStudents` and connected it to **GET `/students`**.
+Once I could save records, I added a second Lambda function called `getStudents`, which exports `getAllStudents`, and connected it to **GET `/students`**.
 
 This function uses a scan to read the table. DynamoDB can return the results in pages, so I used `paginateScan` to keep requesting the next page rather than only returning the first one.
 
@@ -218,6 +221,8 @@ export async function getAllStudents() {
 
 The handler for this export is `index.getAllStudents` when the file is `index.mjs`.
 
+![getStudents Lambda code using paginateScan](./images/lambda_getStudents.png)
+
 `Limit: 100` applies to each scan request; it isn't a limit of 100 students for the whole function. The paginator continues through the available pages.
 
 This line took me a little while to understand:
@@ -230,16 +235,15 @@ It means: take the students from this page and add them individually to my `allS
 
 I assigned the read function a role with permission to scan the table, configured the GET integration and deployed the API changes.
 
+![Policy editor allowing dynamodb:Scan on the students table](./images/dynamoDB_read_policy.png)
+
 The GET endpoint follows this format:
 
 ```text
 https://<api-id>.execute-api.eu-north-1.amazonaws.com/DeployedAPI/students
 ```
 
-![GET students Lambda integration](./images/API_Gateway_Overview_getStudents.png)
-
-![Students returned in Postman](./images/dynamoDB_read_policy.png)
-![Student record saved in DynamoDB](./images/lambda_getStudents.png)
+![GET /students integration request using getStudents, with proxy integration off](./images/API_Gateway_Overview_getStudents.png)
 
 ## 8. Understanding the response format
 
@@ -420,7 +424,9 @@ const docClient = DynamoDBDocumentClient.from(client);
 
 `from()` is a method that creates the document client from the existing client. I call it directly.
 
-imported `paginateScan` instead. I needed to import `PutCommand` from `@aws-sdk/lib-dynamodb`.
+### The write function imported the wrong command
+
+I had imported `paginateScan` instead. I needed to import `PutCommand` from `@aws-sdk/lib-dynamodb`.
 
 ### `event` wasn't available in the write function
 
