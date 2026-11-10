@@ -54,12 +54,16 @@ What it involved: opening the right ports via Security Group firewall rules, und
 
 ### Projects
 
-| Project | What it shows |
-| --- | --- |
-| [EC2 deployment](Networking/Deployment_project/README.md) | A Next.js site served by NGINX on EC2, with HTTPS and Cloudflare DNS |
-| [Flask + Redis with Docker Compose](Docker/Challenge/flask_redis_app/README.md) | Multi-container app with a Redis visit counter, persisted volumes, and NGINX load balancing across Flask replicas |
-| [Custom VPC](AWS/Projects/Custom_network/build_process.md) | A VPC with public and private subnets, route tables, an internet gateway, and EC2 instances in each |
-| [Serverless Student API](AWS/Projects/Serverless_API_Lambda/build_process.md) | API Gateway → Lambda → DynamoDB, with IAM, API keys, usage plans, and WAF rate limiting |
+| Area | Project | What it shows |
+| --- | --- | --- |
+| Bash | [Bash – The Game](Bash/README.md#bash--the-game) | A ten-level scripting challenge series, from loops and conditionals to a directory-change monitor |
+| Networking | [EC2 deployment](Networking/Deployment_project/README.md) | A Next.js site served by NGINX on EC2, with HTTPS and Cloudflare DNS |
+| Docker | [First Flask container](Docker/flask_app/README.md) | Containerising a small Flask app, and the six problems I hit along the way |
+| Docker | [Flask + MySQL](Docker/Guide/flask_app_sqldb.md) | Two containers on a custom network, finding each other by name |
+| Docker | [Flask + Redis with Docker Compose](Docker/Challenge/flask_redis_app/README.md) | Multi-container app with a Redis visit counter, persisted volumes, and NGINX load balancing across Flask replicas |
+| AWS | [Custom VPC](AWS/Projects/Custom_network/build_process.md) | A VPC with public and private subnets, route tables, an internet gateway, and EC2 instances in each |
+| AWS | [Serverless Student API](AWS/Projects/Serverless_API_Lambda/build_process.md) | API Gateway → Lambda → DynamoDB, with IAM, API keys, usage plans, and WAF rate limiting |
+| Terraform | [EC2 module](Terraform/Terraform_Registry/) | An EC2 instance moved into a reusable module with a `moved` block, and state migrated to an S3 backend |
 
 ---
 
