@@ -21,7 +21,7 @@ The API has two methods: one to save a student and another to retrieve the stude
 
 The functions use JavaScript, Node.js and AWS SDK v3. I used the Stockholm region, `eu-north-1`, for this build.
 
-**Build details:** this version uses an API Gateway **REST API**, with **Lambda proxy integration switched off**. WAF was configured and tested, then removed after testing to avoid ongoing costs. A custom domain and ACM certificate were discussed as possible additions but were not completed in this walkthrough.
+
 
 ## 1. Drawing the architecture first
 
