@@ -2,9 +2,9 @@
 // aws_instance is the official resource type defined by the AWS provider; it means an EC2 instance
 
 resource "aws_instance" "wordpress_hosted_ec2" {
-  ami                    = "ami-0fd9576cca965bd19"
-  instance_type          = "t3.micro"
-  subnet_id              = "subnet-0400adbdca473db0b"
+  ami                    = var.ami
+  instance_type          = var.instance_type
+  subnet_id              = var.subnet_id
   vpc_security_group_ids = [aws_security_group.wordpress_hosted.id]
   // because each instance could have multiple security groups, thats why we pass their ids as list items inside []
   user_data                   = file("user-data.sh")

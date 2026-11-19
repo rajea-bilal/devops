@@ -11,5 +11,5 @@ terraform {
 // settings for the required provider
 provider "aws" {
   # Configuration options
-  region = "eu-north-1" // Where Terraform manages your EC2 instances.
+  region = var.region // Where Terraform manages your EC2 instances.
 }
