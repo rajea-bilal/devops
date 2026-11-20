@@ -1,0 +1,12 @@
+name: First CI/CD pipeline
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v2
+      - name: im testing this workflow
+        run: echo Hello Wonderful World!
