@@ -1,8 +1,8 @@
 name: Greeting Workflow
 on: [push]
 
-jobs:
-  builds:
+jobs: # jobs in the workflow
+  greeting:
     runs-on: ubuntu-latest
     steps:
       - name: check out the repo
