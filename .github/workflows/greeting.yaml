@@ -16,5 +16,5 @@ jobs: # jobs in the workflow
 
       - name: Show the greeting time
         env:
-          GREETING_TIME: ${{ step.s greet.outputs.time }}
+          GREETING_TIME: ${{ steps.greet.outputs.time }}
         run: echo "Greeting time was $GRETTING_TIME"
