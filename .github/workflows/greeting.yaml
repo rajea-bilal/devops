@@ -1,0 +1,20 @@
+name: Greeting Workflow
+on: [push]
+
+jobs:
+  builds:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out the repo
+        uses: actions/checkout@v6
+
+      - name: Run my greeting actions
+        id: greet
+        uses: ./custom_actions
+        with:
+          who-to-greet: Rajea
+
+      - name: Show the greeting time
+        env:
+          GREETING_TIME: ${{ step.s greet.outputs.time }}
+        run: echo "Greeting time was $GRETTING_TIME"
