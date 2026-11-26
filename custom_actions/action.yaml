@@ -1,0 +1,17 @@
+name: Rajea Custom Action
+
+description: Greet someone and record the time
+
+inputs:
+  who-to-greet:
+    description: who to greet
+    required: true
+    default: Hello
+
+outputs:
+  time:
+    description: time of greeting
+
+runs:
+  using: node20
+  main: dist/index.js # tells runner which js file to execute
